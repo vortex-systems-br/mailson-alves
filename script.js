@@ -1,15 +1,16 @@
+Aqui está o script.js completo v1.1, com o único ajuste no bloco 8 (Parallax desativado no mobile). Todos os outros blocos permanecem exatamente iguais ao original:
+
 /* ============================================================
    MAILSON ALVES — PSICÓLOGO CLÍNICO
-   script.js v1.0
+   script.js v1.1 (parallax desktop-only)
    Developed by Vórtex Systems BR
    ============================================================ */
-
 'use strict';
 
 /* =========================================================
    1. UTILITIES
    ========================================================= */
-const $ = (sel, ctx = document) => ctx.querySelector(sel);
+const $  = (sel, ctx = document) => ctx.querySelector(sel);
 const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
 /* =========================================================
@@ -41,7 +42,7 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
    4. MOBILE MENU — HAMBURGER TOGGLE
    ========================================================= */
 (function initMobileMenu() {
-  const hamburger = $('#hamburger');
+  const hamburger  = $('#hamburger');
   const mobileMenu = $('#mobile-menu');
   if (!hamburger || !mobileMenu) return;
 
@@ -86,9 +87,7 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
     (entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          // Apply delay from inline style if present
           const delay = entry.target.style.transitionDelay || '0s';
-          // Re-apply to ensure it's active at reveal time
           entry.target.style.transitionDelay = delay;
           entry.target.classList.add('on');
           observer.unobserve(entry.target);
@@ -152,11 +151,11 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
     anchor.addEventListener('click', (e) => {
       const targetId = anchor.getAttribute('href').slice(1);
       if (!targetId) return;
+
       const target = document.getElementById(targetId);
       if (!target) return;
 
       e.preventDefault();
-
       const top = target.getBoundingClientRect().top + window.scrollY - navH;
       window.scrollTo({ top, behavior: 'smooth' });
     });
@@ -164,17 +163,20 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
 })();
 
 /* =========================================================
-   8. PARALLAX — HERO VISUAL (SUBTLE)
+   8. PARALLAX — HERO VISUAL (SUBTLE, DESKTOP ONLY)
    ========================================================= */
 (function initParallax() {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReduced) return;
 
+  // Desativa parallax no mobile (layout empilhado não se beneficia)
+  const mqDesktop = window.matchMedia('(min-width: 769px)');
+  if (!mqDesktop.matches) return;
+
   const heroVisual = $('.hero-visual img');
   if (!heroVisual) return;
 
   let ticking = false;
-
   const onScroll = () => {
     if (!ticking) {
       requestAnimationFrame(() => {
@@ -189,8 +191,12 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
       ticking = true;
     }
   };
-
   window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Reset transform se o usuário redimensionar para mobile
+  mqDesktop.addEventListener('change', (e) => {
+    if (!e.matches) heroVisual.style.transform = '';
+  });
 })();
 
 /* =========================================================
@@ -212,7 +218,6 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
   const setActive = () => {
     const scrollY = window.scrollY + navH + 60;
     let current = sections[0];
-
     sections.forEach(section => {
       if (section.offsetTop <= scrollY) current = section;
     });
@@ -236,9 +241,8 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReduced) return;
 
-  // Hero elements animate on load immediately
+  // Hero elements animate on load immediately (above the fold)
   const heroEls = $$('.hero .rev, .hero .revL, .hero .revR, .hero .revS');
-  // They're handled by IntersectionObserver but hero is above fold, so trigger manually
   setTimeout(() => {
     heroEls.forEach(el => el.classList.add('on'));
   }, 100);
