@@ -1084,3 +1084,10 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   .emotional { padding: 5rem 4.5rem 5rem 1.5rem; }
   .cta-final { padding: 5rem 4.5rem 5rem 1.5rem; }
 }
+/* --- Ajuste específico para Mobile --- */
+@media (max-width: 760px) {
+  .hero-visual img {
+    /* Centraliza perfeitamente na vertical e horizontal em telas pequenas */
+    object-position: 50% 50% !important;
+  }
+}
