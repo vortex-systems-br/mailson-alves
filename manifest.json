@@ -2,7 +2,7 @@
   "name": "Mailson Alves — Psicólogo Clínico",
   "short_name": "Mailson Alves",
   "description": "Psicólogo Clínico em Araçatuba/SP. Atendimento presencial e online. CRP 06/159098.",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#F7F4EF",
   "theme_color": "#A8B2A1",
