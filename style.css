@@ -1,6 +1,6 @@
 /* ============================================================
    MAILSON ALVES — PSICÓLOGO CLÍNICO
-   style.css v1.0
+   style.css v1.1 (mobile hotfix)
    Developed by Vórtex Systems BR
    ============================================================ */
 
@@ -31,23 +31,18 @@ body {
   --color-text-light:   #7A7A72;
   --color-text-muted:   #ABABAB;
   --color-border:       rgba(168,178,161,0.25);
-
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body:    'Inter', system-ui, sans-serif;
-
   --nav-h: 78px;
   --max-w: 1200px;
-
   --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --tr:  0.5s var(--ease);
   --tr2: 0.25s var(--ease);
-
   --sh-sm: 0 2px 12px rgba(42,42,39,.06);
   --sh-md: 0 8px 40px rgba(42,42,39,.08);
   --sh-lg: 0 16px 72px rgba(42,42,39,.10);
   --sh-xl: 0 24px 96px rgba(42,42,39,.12);
-
   --r-sm: 4px; --r-md: 10px; --r-lg: 18px;
   --r-xl: 28px; --r-2xl: 48px; --r-full: 9999px;
 }
@@ -124,7 +119,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   white-space: nowrap;
 }
 .btn svg { width:18px; height:18px; flex-shrink:0; }
-
 .btn-sage {
   background: var(--color-sage);
   color: var(--color-white);
@@ -136,7 +130,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(168,178,161,.45);
 }
-
 .btn-outline {
   background: transparent;
   color: var(--color-text);
@@ -147,7 +140,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   color: var(--color-bg);
   transform: translateY(-2px);
 }
-
 .btn-whatsapp {
   background: #25D366;
   color: #fff;
@@ -159,7 +151,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   transform: translateY(-2px);
   box-shadow: 0 8px 28px rgba(37,211,102,.42);
 }
-
 .btn-ghost-white {
   background: rgba(255,255,255,.12);
   color: #fff;
@@ -189,7 +180,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   border-bottom-color: rgba(168,178,161,.22);
   box-shadow: 0 4px 28px rgba(42,42,39,.05);
 }
-
 .nav {
   display: flex;
   align-items: center;
@@ -200,7 +190,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   margin: 0 auto;
 }
 .nav-logo img { height: 50px; width: auto; }
-
 .nav-links {
   display: flex;
   align-items: center;
@@ -287,9 +276,7 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   position: relative;
   z-index: 2;
 }
-
 .hero-eyebrow { margin-bottom: 1.4rem; }
-
 .hero-title {
   font-size: clamp(2.8rem, 4.2vw, 4.4rem);
   font-weight: 500;
@@ -302,7 +289,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   font-weight: 300;
   color: var(--color-slate);
 }
-
 .hero-sub {
   font-size: 1rem;
   color: var(--color-text-med);
@@ -310,7 +296,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   max-width: 440px;
   margin-bottom: 2.5rem;
 }
-
 .hero-actions {
   display: flex;
   align-items: center;
@@ -318,7 +303,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   gap: 1rem;
   margin-bottom: 3rem;
 }
-
 .hero-badges {
   display: flex;
   flex-direction: column;
@@ -349,7 +333,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   object-fit: cover;
   object-position: 50% 15%;
 }
-/* Left-edge gradient: blends photo into page background */
 .hero-visual::before {
   content:'';
   position:absolute;
@@ -360,7 +343,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   z-index:1;
   pointer-events:none;
 }
-/* Organic decorative ring */
 .hero-visual::after {
   content:'';
   position:absolute;
@@ -371,8 +353,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   z-index:2;
   pointer-events:none;
 }
-
-/* Subtle radial glow behind the hero split */
 .hero-glow {
   position:absolute;
   top:0; left:42%;
@@ -437,7 +417,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   max-width: var(--max-w);
   margin: 0 auto;
 }
-
 .about-img-wrap { position: relative; }
 .about-img-frame {
   border-radius: var(--r-xl);
@@ -452,8 +431,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   transition: transform .9s var(--ease);
 }
 .about-img-frame:hover img { transform: scale(1.04); }
-
-/* offset decorative border */
 .about-img-deco {
   position: absolute;
   inset: -14px;
@@ -461,7 +438,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   border: 1.5px solid rgba(168,178,161,.32);
   z-index: -1;
 }
-/* floating badge */
 .about-badge {
   position: absolute;
   bottom: -18px; right: -18px;
@@ -487,7 +463,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   display: block;
   margin-top: 2px;
 }
-
 .about-content { padding-right: 2rem; }
 .about-title {
   font-size: clamp(1.9rem, 2.8vw, 2.65rem);
@@ -524,8 +499,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   padding: 8rem 2rem;
   background: var(--color-white);
 }
-
-/* 6-col grid so 5 cards can be 3+2 centered */
 .spec-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -536,7 +509,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
 .spec-card { grid-column: span 2; }
 .spec-card:nth-child(4) { grid-column: 2 / 4; }
 .spec-card:nth-child(5) { grid-column: 4 / 6; }
-
 .spec-card {
   background: var(--color-bg);
   border-radius: var(--r-xl);
@@ -563,7 +535,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   border-color: rgba(168,178,161,.38);
 }
 .spec-card:hover::after { transform: scaleX(1); }
-
 .spec-icon {
   width: 46px; height: 46px;
   color: var(--color-sage);
@@ -591,7 +562,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   position: relative;
   overflow: hidden;
 }
-/* Giant decorative quote char */
 .psicanalise::before {
   content:'"';
   position:absolute;
@@ -603,7 +573,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   user-select:none;
   pointer-events:none;
 }
-
 .psicanalise-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -696,7 +665,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   background: linear-gradient(to bottom, var(--color-sage-light), rgba(168,178,161,.12));
 }
 .tl-item:last-child .tl-line { display:none; }
-
 .tl-body { padding: .3rem 0 3.5rem .5rem; }
 .tl-body:last-child { padding-bottom: 0; }
 .tl-title {
@@ -787,7 +755,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   transition: color var(--tr2);
 }
 .faq-q:hover .faq-q-text { color: var(--color-slate); }
-
 .faq-toggle {
   width: 30px; height: 30px;
   border-radius: 50%;
@@ -806,7 +773,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   color: #fff;
 }
 .faq-item.open .faq-toggle svg { transform: rotate(45deg); }
-
 .faq-a {
   max-height: 0;
   overflow: hidden;
@@ -830,7 +796,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   position: relative;
   overflow: hidden;
 }
-/* decorative rings */
 .cta-final::before {
   content:'';
   position:absolute;
@@ -916,8 +881,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   margin-top: 2px;
   stroke-width: 1.6;
 }
-
-/* Map */
 .footer-map-wrap {
   max-width: var(--max-w);
   margin: 0 auto 3rem;
@@ -927,7 +890,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   box-shadow: var(--sh-sm);
 }
 .footer-map-wrap iframe { display:block; }
-
 .footer-bottom {
   max-width: var(--max-w);
   margin: 0 auto;
@@ -973,10 +935,9 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   animation: none;
 }
 .float-wa svg { width:28px; height:28px; }
-
 @keyframes wa-pulse {
   0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,.5), 0 0 0 0 rgba(37,211,102,.35); }
-  60%      { box-shadow: 0 4px 20px rgba(37,211,102,.5), 0 0 0 14px rgba(37,211,102,0); }
+  60%     { box-shadow: 0 4px 20px rgba(37,211,102,.5), 0 0 0 14px rgba(37,211,102,0); }
 }
 
 /* ============================================================
@@ -1009,46 +970,106 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 
-/* Mobile */
+/* ============================================================
+   MOBILE HOTFIX v1.1
+   - Foto no topo (order:-1)
+   - Sem espaço em branco (min-height:auto)
+   - Eyebrow não colide mais com a navbar
+   - Círculo decorativo e glow removidos no mobile
+   - Botões mais próximos e stretch
+   - WhatsApp flutuante reduzido + padding-right nos blocos de texto
+   ============================================================ */
 @media (max-width: 768px) {
-  :root { --nav-h:66px; }
+  :root { --nav-h: 66px; }
 
-  .nav-links, .nav-cta { display:none; }
-  .hamburger { display:flex; }
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
 
-  .hero { grid-template-columns: 1fr; min-height:100vh; }
+  /* HERO */
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding-top: var(--nav-h);
+  }
+
   .hero-visual {
-    height: 48vw;
-    min-height: 260px;
-    max-height: 380px;
+    order: -1;
+    width: 100%;
+    height: 62vw;
+    min-height: 300px;
+    max-height: 420px;
+    margin-bottom: 1rem;
   }
+  .hero-visual img { object-position: 50% 20%; }
   .hero-visual::before {
-    background: linear-gradient(to bottom, transparent 50%, var(--color-bg) 100%);
+    background: linear-gradient(to bottom, transparent 55%, var(--color-bg) 100%);
   }
+  .hero-visual::after { display: none; }
+  .hero-glow { display: none; }
+
   .hero-content {
-    padding: 2rem 1.5rem 3rem;
+    padding: 1.5rem 1.5rem 3rem;
     justify-content: flex-start;
   }
-  .hero-eyebrow { margin-bottom:1rem; }
-
-  .spec-grid {
-    grid-template-columns: 1fr;
+  .hero-eyebrow {
+    margin-bottom: 1rem;
+    font-size: .62rem;
+    letter-spacing: .18em;
   }
+  .hero-title  { font-size: clamp(2.2rem, 8vw, 3rem); }
+  .hero-sub    { font-size: .95rem; margin-bottom: 1.75rem; }
+  .hero-actions { margin-bottom: 2rem; }
+  .hero-badges  { gap: .5rem; }
+
+  /* Layouts empilhados */
+  .spec-grid { grid-template-columns: 1fr; }
   .spec-card,
   .spec-card:nth-child(4),
   .spec-card:nth-child(5) { grid-column: 1 / -1; }
 
   .att-grid { grid-template-columns: 1fr; }
 
-  .footer-grid { grid-template-columns: 1fr; gap:2.5rem; }
-  .footer-bottom { flex-direction:column; text-align:center; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .footer-bottom { flex-direction: column; text-align: center; }
 
-  .float-wa { bottom:1.25rem; right:1.25rem; width:50px; height:50px; }
+  /* WhatsApp flutuante mais discreto */
+  .float-wa {
+    bottom: 1rem;
+    right: 1rem;
+    width: 46px;
+    height: 46px;
+    box-shadow: 0 4px 14px rgba(37,211,102,.42);
+  }
+  .float-wa svg { width: 22px; height: 22px; }
+
+  @keyframes wa-pulse {
+    0%, 100% { box-shadow: 0 4px 14px rgba(37,211,102,.42), 0 0 0 0 rgba(37,211,102,.28); }
+    60%      { box-shadow: 0 4px 14px rgba(37,211,102,.42), 0 0 0 8px rgba(37,211,102,0); }
+  }
+
+  /* Blocos com CTA que ficam próximos ao botão flutuante ganham respiro à direita */
+  .emotional { padding: 8rem 4.5rem 8rem 1.5rem; }
+  .cta-final { padding: 8rem 4.5rem 8rem 1.5rem; }
 }
 
 @media (max-width: 480px) {
-  .hero-actions { flex-direction:column; align-items:flex-start; }
-  .hero-actions .btn { width:100%; justify-content:center; }
-  .emotional { padding:5rem 1.5rem; }
-  .about,.specialties,.psicanalise,.como-funciona,.atendimento,.faq,.cta-final { padding:5rem 1.5rem; }
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: .6rem;
+  }
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .about,
+  .specialties,
+  .psicanalise,
+  .como-funciona,
+  .atendimento,
+  .faq { padding: 5rem 1.5rem; }
+
+  .emotional { padding: 5rem 4.5rem 5rem 1.5rem; }
+  .cta-final { padding: 5rem 4.5rem 5rem 1.5rem; }
 }
