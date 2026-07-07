@@ -1,5 +1,3 @@
-Aqui está o script.js completo v1.1, com o único ajuste no bloco 8 (Parallax desativado no mobile). Todos os outros blocos permanecem exatamente iguais ao original:
-
 /* ============================================================
    MAILSON ALVES — PSICÓLOGO CLÍNICO
    script.js v1.1 (parallax desktop-only)
