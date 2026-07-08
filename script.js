@@ -265,3 +265,160 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   hideZones.forEach(el => observer.observe(el));
 })();
+/* =========================================================
+   12. PRIMEIRO PASSO — FLUXO INTERATIVO → WHATSAPP
+   ========================================================= */
+(function initPrimeiroPasso() {
+  const section = document.querySelector('.pap');
+  if (!section) return;
+
+  /* --- State --- */
+  const state = { sentimento: null, formato: null, horario: null };
+
+  /* --- Mapeamento de labels para a mensagem --- */
+  const LABELS = {
+    sentimento: {
+      'ansiedade':            'ansiedade',
+      'depressao':            'depressão',
+      'luto':                 'luto',
+      'conflitos-familiares': 'conflitos familiares',
+      'compulsoes':           'compulsões alimentares',
+      'nao-sei':              'algo que ainda não sei nomear ao certo',
+    },
+    formato: {
+      'presencial': 'presencial (em Araçatuba/SP)',
+      'online':     'online (por videochamada)',
+    },
+    horario: {
+      'manha':    'pela manhã (08h às 12h)',
+      'tarde':    'à tarde (12h às 19h)',
+      'qualquer': 'em qualquer horário disponível',
+    },
+  };
+
+  /* --- Elementos --- */
+  const panels    = section.querySelectorAll('.pap-panel');
+  const progSteps = section.querySelectorAll('.pap-prog-step');
+  const fills     = [
+    section.querySelector('#pap-fill-1'),
+    section.querySelector('#pap-fill-2'),
+  ];
+  const preview   = section.querySelector('#pap-preview');
+  const waLink    = section.querySelector('#pap-wa-link');
+  const restart   = section.querySelector('#pap-restart');
+
+  /* --- Navegar para um passo --- */
+  function goToStep(step) {
+    /* Painéis */
+    panels.forEach((p, i) => p.classList.toggle('active', i === step - 1));
+
+    /* Indicadores de progresso */
+    progSteps.forEach((item, i) => {
+      const s = i + 1;
+      item.classList.toggle('active', s === step);
+      item.classList.toggle('done',   s < step || step > 3);
+    });
+
+    /* Faixas de preenchimento */
+    fills.forEach((fill, i) => {
+      if (!fill) return;
+      fill.classList.toggle('full', step > i + 1 || step > 3);
+    });
+
+    /* Acessibilidade: atualiza aria-valuenow */
+    const bar = section.querySelector('[aria-valuenow]');
+    if (bar && step <= 3) bar.setAttribute('aria-valuenow', step);
+  }
+
+  /* --- Montar a mensagem de WhatsApp --- */
+  function buildMessage() {
+    const s = LABELS.sentimento[state.sentimento] || state.sentimento;
+    const f = LABELS.formato[state.formato]       || state.formato;
+    const h = LABELS.horario[state.horario]        || state.horario;
+
+    return [
+      'Olá, Mailson! Gostaria de saber mais sobre o atendimento psicológico.',
+      '',
+      `Estou passando por *${s}* e prefiro o formato *${f}*, de preferência *${h}*.`,
+      '',
+      'Poderia me informar sobre disponibilidade e como funciona o processo? Obrigado(a)!',
+    ].join('\n');
+  }
+
+  /* --- Exibir tela de resultado --- */
+  function showResult() {
+    const s = LABELS.sentimento[state.sentimento] || state.sentimento;
+    const f = LABELS.formato[state.formato]       || state.formato;
+    const h = LABELS.horario[state.horario]        || state.horario;
+
+    /* Preview visual (HTML formatado) */
+    if (preview) {
+      preview.innerHTML =
+        'Olá, Mailson! Gostaria de saber mais sobre o atendimento psicológico.<br><br>' +
+        `Estou passando por <strong>${s}</strong> e prefiro o formato <strong>${f}</strong>, ` +
+        `de preferência <strong>${h}</strong>.<br><br>` +
+        'Poderia me informar sobre disponibilidade e como funciona o processo? Obrigado(a)!';
+    }
+
+    /* Link de WhatsApp com mensagem pré-preenchida */
+    if (waLink) {
+      waLink.href = 'https://wa.me/5518991250514?text=' + encodeURIComponent(buildMessage());
+    }
+
+    goToStep(4);
+  }
+
+  /* --- Cliques nos cards --- */
+  section.querySelectorAll('.pap-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      const panel   = card.closest('.pap-panel');
+      const panelId = panel ? panel.id : '';
+
+      /* Marca selecionado visualmente */
+      if (panel) {
+        panel.querySelectorAll('.pap-card').forEach(function(c) {
+          c.classList.remove('selected');
+        });
+      }
+      card.classList.add('selected');
+
+      const value = card.dataset.value;
+
+      /* Pequeno delay para o usuário ver a seleção antes de avançar */
+      setTimeout(function() {
+        if (panelId === 'pap-panel-1') {
+          state.sentimento = value;
+          goToStep(2);
+        } else if (panelId === 'pap-panel-2') {
+          state.formato = value;
+          goToStep(3);
+        } else if (panelId === 'pap-panel-3') {
+          state.horario = value;
+          showResult();
+        }
+      }, 200);
+    });
+
+    /* Acessibilidade: Enter e Space ativam o card */
+    card.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        card.click();
+      }
+    });
+  });
+
+  /* --- Botão recomeçar --- */
+  if (restart) {
+    restart.addEventListener('click', function() {
+      state.sentimento = null;
+      state.formato    = null;
+      state.horario    = null;
+      section.querySelectorAll('.pap-card').forEach(function(c) {
+        c.classList.remove('selected');
+      });
+      goToStep(1);
+    });
+  }
+
+})();
