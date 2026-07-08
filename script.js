@@ -4,26 +4,22 @@
    Developed by Vórtex Systems BR
    ============================================================ */
 'use strict';
-
 /* =========================================================
    1. UTILITIES
    ========================================================= */
 const $  = (sel, ctx = document) => ctx.querySelector(sel);
 const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
-
 /* =========================================================
    2. YEAR IN FOOTER
    ========================================================= */
 const yearEl = $('#year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-/* =========================================================
+/* ========================================================
    3. NAVBAR — GLASSMORPHISM ON SCROLL
    ========================================================= */
 (function initNavbar() {
   const header = $('#header');
   if (!header) return;
-
   const onScroll = () => {
     if (window.scrollY > 48) {
       header.classList.add('scrolled');
@@ -31,11 +27,9 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
       header.classList.remove('scrolled');
     }
   };
-
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll(); // run once on load
 })();
-
 /* =========================================================
    4. MOBILE MENU — HAMBURGER TOGGLE
    ========================================================= */
@@ -50,17 +44,14 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
     document.body.style.overflow = open ? 'hidden' : '';
     hamburger.setAttribute('aria-expanded', String(open));
   };
-
   hamburger.addEventListener('click', () => {
     const isOpen = mobileMenu.classList.contains('open');
     toggle(!isOpen);
   });
-
   // Close when a mobile link is clicked
   $$('.mobile-link, .mobile-menu .btn').forEach(link => {
     link.addEventListener('click', () => toggle(false));
   });
-
   // Close on ESC
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
@@ -69,7 +60,6 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
     }
   });
 })();
-
 /* =========================================================
    5. SCROLL REVEAL — INTERSECTION OBSERVER
    ========================================================= */
@@ -80,7 +70,6 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
     $$('.rev,.revL,.revR,.revS').forEach(el => el.classList.add('on'));
     return;
   }
-
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach(entry => {
@@ -94,10 +83,8 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
     },
     { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
   );
-
   $$('.rev, .revL, .revR, .revS').forEach(el => observer.observe(el));
 })();
-
 /* =========================================================
    6. FAQ ACCORDION
    ========================================================= */
@@ -108,24 +95,20 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
   items.forEach(item => {
     const btn = item.querySelector('.faq-q');
     if (!btn) return;
-
     btn.addEventListener('click', () => {
       const isOpen = item.classList.contains('open');
-
       // Close all
       items.forEach(i => {
         i.classList.remove('open');
         const q = i.querySelector('.faq-q');
         if (q) q.setAttribute('aria-expanded', 'false');
       });
-
       // Open clicked (if it was closed)
       if (!isOpen) {
         item.classList.add('open');
         btn.setAttribute('aria-expanded', 'true');
       }
     });
-
     // Keyboard support
     btn.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
@@ -135,7 +118,6 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
     });
   });
 })();
-
 /* =========================================================
    7. SMOOTH SCROLL — ANCHOR LINKS
    ========================================================= */
@@ -144,36 +126,29 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
     getComputedStyle(document.documentElement).getPropertyValue('--nav-h') || '78',
     10
   );
-
   $$('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', (e) => {
       const targetId = anchor.getAttribute('href').slice(1);
       if (!targetId) return;
-
       const target = document.getElementById(targetId);
       if (!target) return;
-
       e.preventDefault();
       const top = target.getBoundingClientRect().top + window.scrollY - navH;
       window.scrollTo({ top, behavior: 'smooth' });
     });
   });
 })();
-
 /* =========================================================
    8. PARALLAX — HERO VISUAL (SUBTLE, DESKTOP ONLY)
    ========================================================= */
 (function initParallax() {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReduced) return;
-
   // Desativa parallax no mobile (layout empilhado não se beneficia)
   const mqDesktop = window.matchMedia('(min-width: 769px)');
   if (!mqDesktop.matches) return;
-
   const heroVisual = $('.hero-visual img');
   if (!heroVisual) return;
-
   let ticking = false;
   const onScroll = () => {
     if (!ticking) {
@@ -208,18 +183,14 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
       return id ? document.getElementById(id) : null;
     })
     .filter(Boolean);
-
   if (!sections.length) return;
-
   const navH = 90;
-
   const setActive = () => {
     const scrollY = window.scrollY + navH + 60;
     let current = sections[0];
     sections.forEach(section => {
       if (section.offsetTop <= scrollY) current = section;
     });
-
     navLinks.forEach(link => {
       link.removeAttribute('aria-current');
       if (link.getAttribute('href') === `#${current.id}`) {
@@ -227,18 +198,15 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
       }
     });
   };
-
   window.addEventListener('scroll', setActive, { passive: true });
   setActive();
 })();
-
 /* =========================================================
    10. HERO ENTRANCE ANIMATION (ON LOAD)
    ========================================================= */
 (function initHeroEntrance() {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReduced) return;
-
   // Hero elements animate on load immediately (above the fold)
   const heroEls = $$('.hero .rev, .hero .revL, .hero .revR, .hero .revS');
   setTimeout(() => {
