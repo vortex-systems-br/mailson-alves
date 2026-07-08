@@ -389,6 +389,39 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   position: relative;
   z-index:1;
 }
+/* === EMOTIONAL DECO === */
+.emotional { position: relative; overflow: hidden; }
+.emotional-deco {
+  position: absolute;
+  top: -60px; left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-display);
+  font-size: clamp(14rem, 22vw, 26rem);
+  color: rgba(168,178,161,.055);
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* === ABOUT BADGE MOBILE === */
+.about-badge--mobile { display: none; }
+
+@media (max-width: 768px) {
+  .about-badge:not(.about-badge--mobile) { display: none; }
+  .about-badge--mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: static;
+    margin: 1.5rem auto 0;
+    max-width: 180px;
+    box-shadow: var(--sh-sm);
+    border-radius: var(--r-xl);
+    padding: 1rem 1.4rem;
+    background: var(--color-white);
+    text-align: center;
+  }
+}
 .emotional-title {
   font-size: clamp(1.9rem, 3.5vw, 2.9rem);
   font-weight: 400;
