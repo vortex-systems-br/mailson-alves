@@ -1086,8 +1086,15 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
 }
 /* --- Ajuste específico para Mobile --- */
 @media (max-width: 760px) {
+  .hero-visual {
+    height: 400px !important; /* Força um espaço alto o suficiente para mostrar o rosto */
+    min-height: 400px !important;
+  }
+  
   .hero-visual img {
-    /* Centraliza perfeitamente na vertical e horizontal em telas pequenas */
-    object-position: 50% 50% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    /* Move o foco levemente para cima para focar bem no rosto e óculos */
+    object-position: 50% 15% !important; 
   }
 }
