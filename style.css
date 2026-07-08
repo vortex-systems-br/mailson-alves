@@ -1,7 +1,6 @@
-
 /* ============================================================
    MAILSON ALVES — PSICÓLOGO CLÍNICO
-   style.css v1.2 (mobile fix — header sempre visível, hero full-width)
+   style.css v1.3 (+ Seção Primeiro Passo)
    Developed by Vórtex Systems BR
    ============================================================ */
 
@@ -267,7 +266,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   overflow: hidden;
 }
 
-/* --- Hero content (left) --- */
 .hero-content {
   display: flex;
   flex-direction: column;
@@ -323,7 +321,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   flex-shrink: 0;
 }
 
-/* --- Hero visual (right) --- */
 .hero-visual {
   position: relative;
   overflow: hidden;
@@ -389,8 +386,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   position: relative;
   z-index:1;
 }
-/* === EMOTIONAL DECO === */
-.emotional { position: relative; overflow: hidden; }
 .emotional-deco {
   position: absolute;
   top: -60px; left: 50%;
@@ -403,7 +398,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   pointer-events: none;
 }
 
-/* === ABOUT BADGE MOBILE === */
 .about-badge--mobile { display: none; }
 
 @media (max-width: 768px) {
@@ -759,6 +753,285 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
 }
 
 /* ============================================================
+   PRIMEIRO PASSO — SEÇÃO INTERATIVA
+   ============================================================ */
+.pap {
+  padding: 8rem 2rem;
+  background: var(--color-white);
+  position: relative;
+  overflow: hidden;
+}
+.pap::before {
+  content: '';
+  position: absolute;
+  bottom: -200px; right: -200px;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(168,178,161,.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Wrapper central */
+.pap-wrap {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+/* Barra de progresso */
+.pap-progress {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin-bottom: 3.5rem;
+  max-width: 380px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.pap-prog-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  flex-shrink: 0;
+}
+.pap-prog-num {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 2px solid rgba(168,178,161,.3);
+  background: var(--color-bg);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  transition: all .45s var(--ease);
+  position: relative;
+  z-index: 1;
+}
+.pap-prog-step.active .pap-prog-num {
+  background: var(--color-sage);
+  border-color: var(--color-sage);
+  color: var(--color-white);
+  box-shadow: 0 4px 18px rgba(168,178,161,.5);
+  transform: scale(1.08);
+}
+.pap-prog-step.done .pap-prog-num {
+  background: var(--color-sage-dark);
+  border-color: var(--color-sage-dark);
+  color: var(--color-white);
+  font-size: 0;
+}
+.pap-prog-step.done .pap-prog-num::after {
+  content: '';
+  display: block;
+  width: 12px; height: 7px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(-45deg) translate(1px, -1px);
+}
+.pap-prog-label {
+  font-size: .65rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  transition: color .4s var(--ease);
+  white-space: nowrap;
+}
+.pap-prog-step.active .pap-prog-label,
+.pap-prog-step.done  .pap-prog-label {
+  color: var(--color-sage-dark);
+}
+.pap-prog-line {
+  flex: 1;
+  height: 2px;
+  background: rgba(168,178,161,.22);
+  margin-top: 22px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: var(--r-full);
+  overflow: hidden;
+  min-width: 60px;
+}
+.pap-prog-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--color-sage), var(--color-sage-dark));
+  border-radius: var(--r-full);
+  transition: width .55s var(--ease);
+}
+.pap-prog-fill.full { width: 100%; }
+
+/* Painéis */
+.pap-panels { position: relative; min-height: 300px; }
+.pap-panel  { display: none; }
+.pap-panel.active {
+  display: block;
+  animation: pap-in .42s var(--ease) both;
+}
+@keyframes pap-in {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Textos do painel */
+.pap-question {
+  font-family: var(--font-display);
+  font-size: clamp(1.55rem, 2.8vw, 2.1rem);
+  font-weight: 500;
+  color: var(--color-text);
+  text-align: center;
+  margin-bottom: .5rem;
+  line-height: 1.2;
+}
+.pap-hint {
+  font-size: .88rem;
+  color: var(--color-text-light);
+  text-align: center;
+  margin-bottom: 2.5rem;
+  line-height: 1.65;
+}
+
+/* Grids de cards */
+.pap-grid     { display: grid; gap: 1rem; }
+.pap-grid--3  { grid-template-columns: repeat(3, 1fr); }
+.pap-grid--2  { grid-template-columns: repeat(2, 1fr); }
+.pap-grid--centered { max-width: 540px; margin-left: auto; margin-right: auto; }
+
+/* Cards */
+.pap-card {
+  background: var(--color-bg);
+  border: 1.5px solid rgba(168,178,161,.22);
+  border-radius: var(--r-xl);
+  padding: 1.75rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .55rem;
+  cursor: pointer;
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease),
+              border-color .3s var(--ease), background .3s var(--ease);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+.pap-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-sage), var(--color-slate));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s var(--ease);
+  border-radius: var(--r-full) var(--r-full) 0 0;
+}
+.pap-card:hover              { transform: translateY(-5px); box-shadow: var(--sh-md); border-color: rgba(168,178,161,.48); }
+.pap-card:hover::before      { transform: scaleX(1); }
+.pap-card:focus-visible      { outline: 2px solid var(--color-sage); outline-offset: 3px; }
+.pap-card.selected           { background: rgba(168,178,161,.1); border-color: var(--color-sage); transform: translateY(-5px); box-shadow: 0 8px 28px rgba(168,178,161,.28); }
+.pap-card.selected::before   { transform: scaleX(1); }
+
+/* Ícone do card — tamanho fixo, SVG contido */
+.pap-card-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  color: var(--color-sage);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color .3s var(--ease);
+}
+.pap-card-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.pap-card.selected .pap-card-icon { color: var(--color-sage-dark); }
+
+/* Textos do card */
+.pap-card-label {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+.pap-card-sub {
+  font-size: .74rem;
+  color: var(--color-text-light);
+  line-height: 1.45;
+}
+
+/* Card grande (passo 2) */
+.pap-card--lg             { padding: 2.5rem 2rem; }
+.pap-card--lg .pap-card-icon  { width: 58px; height: 58px; }
+.pap-card--lg .pap-card-label { font-size: 1.35rem; }
+
+/* Resultado */
+.pap-result-panel { text-align: center; padding-top: .5rem; }
+.pap-result-icon {
+  width: 70px; height: 70px;
+  border-radius: 50%;
+  background: rgba(168,178,161,.12);
+  border: 2px solid var(--color-sage-light);
+  color: var(--color-sage-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  animation: pap-check-pop .5s var(--ease-spring) both;
+}
+@keyframes pap-check-pop {
+  from { transform: scale(0.5); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+.pap-result-icon svg { width: 32px; height: 32px; }
+.pap-result-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.55rem, 2.8vw, 2.1rem);
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: .4rem;
+}
+.pap-result-sub {
+  font-size: .88rem;
+  color: var(--color-text-light);
+  margin-bottom: 1.5rem;
+}
+.pap-result-preview {
+  background: var(--color-bg);
+  border: 1px solid rgba(168,178,161,.3);
+  border-left: 3px solid var(--color-sage);
+  border-radius: var(--r-lg);
+  padding: 1.5rem 1.75rem;
+  text-align: left;
+  font-size: .92rem;
+  color: var(--color-text-med);
+  line-height: 1.85;
+  margin-bottom: 2rem;
+}
+.pap-result-preview strong { color: var(--color-text); font-weight: 600; }
+.pap-wa-btn { font-size: .88rem; padding: 1rem 2.5rem; }
+.pap-restart {
+  display: block;
+  margin: 1.25rem auto 0;
+  font-size: .78rem;
+  color: var(--color-text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--tr2);
+}
+.pap-restart:hover { color: var(--color-slate); }
+
+/* ============================================================
    FAQ
    ============================================================ */
 .faq {
@@ -970,7 +1243,6 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
 }
 .float-wa svg { width:28px; height:28px; }
 
-/* FIX v1.2: @keyframes fora do @media (evita bugs em alguns browsers) */
 @keyframes wa-pulse {
   0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,.5), 0 0 0 0 rgba(37,211,102,.35); }
   60%     { box-shadow: 0 4px 20px rgba(37,211,102,.5), 0 0 0 14px rgba(37,211,102,0); }
@@ -997,27 +1269,19 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
    ============================================================ */
 @media (max-width: 1024px) {
   .hero { grid-template-columns: 1fr 1fr; }
-  .about-grid  { grid-template-columns: 1fr; gap:3rem; }
-  .about-content { padding-right:0; }
-  .about-img-wrap { max-width:400px; margin:0 auto; }
+  .about-grid      { grid-template-columns: 1fr; gap:3rem; }
+  .about-content   { padding-right:0; }
+  .about-img-wrap  { max-width:400px; margin:0 auto; }
   .psicanalise-inner { grid-template-columns: 1fr; gap:3rem; }
-  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid     { grid-template-columns: 1fr 1fr; }
 }
 
 /* ============================================================
-   RESPONSIVE — MOBILE  (≤ 768 px)
-   ============================================================
-   Correções v1.2:
-   ① Header sempre opaco no mobile — impede que o eyebrow
-     "vaze" visualmente para dentro da navbar transparente
-   ② hero-visual: altura aumentada (70 vw) e margin-bottom:0
-     (o gradiente já cria a transição suave para o conteúdo)
-   ③ @keyframes wa-pulse movido para fora do @media
+   RESPONSIVE — MOBILE (≤ 768px)
    ============================================================ */
 @media (max-width: 768px) {
   :root { --nav-h: 66px; }
 
-  /* ① FIX: header sempre visível no mobile */
   .header {
     background: rgba(247,244,239,.97);
     backdrop-filter: blur(16px);
@@ -1029,21 +1293,18 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   .nav-links, .nav-cta { display: none; }
   .hamburger { display: flex; }
 
-  /* HERO — layout empilhado */
   .hero {
     grid-template-columns: 1fr;
     min-height: auto;
     padding-top: var(--nav-h);
   }
-
-  /* ② FIX: imagem no topo, altura adequada, sem gap desnecessário */
   .hero-visual {
     order: -1;
     width: 100%;
-    height: 70vw;       /* era 62vw — agora maior e mais impactante */
-    min-height: 280px;  /* era 300px */
+    height: 70vw;
+    min-height: 280px;
     max-height: 420px;
-    margin-bottom: 0;   /* era 1rem — gradiente faz a transição */
+    margin-bottom: 0;
   }
   .hero-visual img { object-position: 50% 20%; }
   .hero-visual::before {
@@ -1051,22 +1312,13 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   }
   .hero-visual::after { display: none; }
   .hero-glow { display: none; }
-
-  .hero-content {
-    padding: 1.5rem 1.5rem 3rem;
-    justify-content: flex-start;
-  }
-  .hero-eyebrow {
-    margin-bottom: 1rem;
-    font-size: .62rem;
-    letter-spacing: .18em;
-  }
-  .hero-title  { font-size: clamp(2.2rem, 8vw, 3rem); }
-  .hero-sub    { font-size: .95rem; margin-bottom: 1.75rem; }
+  .hero-content { padding: 1.5rem 1.5rem 3rem; justify-content: flex-start; }
+  .hero-eyebrow { margin-bottom: 1rem; font-size: .62rem; letter-spacing: .18em; }
+  .hero-title   { font-size: clamp(2.2rem, 8vw, 3rem); }
+  .hero-sub     { font-size: .95rem; margin-bottom: 1.75rem; }
   .hero-actions { margin-bottom: 2rem; }
   .hero-badges  { gap: .5rem; }
 
-  /* Layouts empilhados */
   .spec-grid { grid-template-columns: 1fr; }
   .spec-card,
   .spec-card:nth-child(4),
@@ -1074,28 +1326,29 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
 
   .att-grid { grid-template-columns: 1fr; }
 
-  .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  /* Primeiro Passo — mobile */
+  .pap              { padding: 5rem 1.5rem; }
+  .pap-grid--3      { grid-template-columns: repeat(2, 1fr); }
+  .pap-grid--2      { grid-template-columns: 1fr; }
+  .pap-grid--centered { max-width: 100%; }
+  .pap-prog-line    { min-width: 30px; }
+
+  .footer-grid   { grid-template-columns: 1fr; gap: 2.5rem; }
   .footer-bottom { flex-direction: column; text-align: center; }
 
-  /* WhatsApp flutuante mais discreto */
   .float-wa {
-    bottom: 1rem;
-    right: 1rem;
-    width: 46px;
-    height: 46px;
+    bottom: 1rem; right: 1rem;
+    width: 46px; height: 46px;
     box-shadow: 0 4px 14px rgba(37,211,102,.42);
   }
   .float-wa svg { width: 22px; height: 22px; }
 
-  /* ③ @keyframes wa-pulse foi movido para fora do @media (ver acima) */
-
-  /* Respiro lateral nas seções com texto próximo ao botão flutuante */
   .emotional { padding: 8rem 4.5rem 8rem 1.5rem; }
   .cta-final { padding: 8rem 4.5rem 8rem 1.5rem; }
 }
 
 /* ============================================================
-   RESPONSIVE — SMALL MOBILE (≤ 480 px)
+   RESPONSIVE — SMALL MOBILE (≤ 480px)
    ============================================================ */
 @media (max-width: 480px) {
   .hero-actions {
@@ -1103,10 +1356,7 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
     align-items: stretch;
     gap: .6rem;
   }
-  .hero-actions .btn {
-    width: 100%;
-    justify-content: center;
-  }
+  .hero-actions .btn { width: 100%; justify-content: center; }
 
   .about,
   .specialties,
@@ -1117,18 +1367,21 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
 
   .emotional { padding: 5rem 4.5rem 5rem 1.5rem; }
   .cta-final { padding: 5rem 4.5rem 5rem 1.5rem; }
+
+  /* Primeiro Passo — small mobile */
+  .pap-grid--3    { grid-template-columns: 1fr; }
+  .pap-prog-label { font-size: .58rem; letter-spacing: .06em; }
+  .pap-result-preview { padding: 1.25rem; }
 }
-/* --- Ajuste específico para Mobile --- */
+
 @media (max-width: 760px) {
   .hero-visual {
-    height: 400px !important; /* Força um espaço alto o suficiente para mostrar o rosto */
+    height: 400px !important;
     min-height: 400px !important;
   }
-  
   .hero-visual img {
     height: 100% !important;
     object-fit: cover !important;
-    /* Move o foco levemente para cima para focar bem no rosto e óculos */
-    object-position: 50% 15% !important; 
+    object-position: 50% 15% !important;
   }
 }
